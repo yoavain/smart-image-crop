@@ -1,21 +1,18 @@
 import * as React from "react";
 import { FC, useEffect, useState } from "react";
-import { annotateImage } from "@yoavain/smart-image-crop-core";
-import { processInput } from "@yoavain/smart-image-crop-browser";
+import { annotateImage } from "@yoavain/smart-image-crop-browser";
 import * as maxvis from "@codait/max-vis";
-import type { Rank, Tensor } from "@tensorflow/tfjs";
 
 const originalImageDisplay = { width: "640px" };
 const landscape = { width: "320px", height: "240px"};
 const portrait = { width: "240px", height: "320px" };
 const square = { width: "240px", height: "240px" };
 
-
 export const App: FC<{}> = () => {
     const [selectedFile, setSelectedFile] = useState();
     const [image, setImage] = useState();
+    const [prediction, setPrediction] = useState();
     const [annotatedImage, setAnnotatedImage] = useState();
-
 
     const imageRef = React.createRef();
 
@@ -33,11 +30,9 @@ export const App: FC<{}> = () => {
 
     useEffect(() => {
         if (image) {
-            processInput(imageRef.current)
-                .then((tensor: Tensor<Rank>) => {
-                    return annotateImage(tensor);
-                })
+            annotateImage(imageRef.current)
                 .then(predictionJson => {
+                    setPrediction(predictionJson);
                     return maxvis.annotate(predictionJson, image);
                 })
                 .then((annotatedImageBlob: Buffer) => {
@@ -45,6 +40,10 @@ export const App: FC<{}> = () => {
                 })
         }
     }, [image])
+
+    useEffect(() => {
+
+    }, prediction)
 
     const onFileChange = (event) => {
         setSelectedFile(event.target.files[0])
