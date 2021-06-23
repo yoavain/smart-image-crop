@@ -20,11 +20,7 @@ server.register(compress);
 server.register(require('fastify-static'), {
   root: path.join(__dirname, "..", "..", './public')
 })
-server.setNotFoundHandler((req, res) => {
-  res.sendFile('index.html')
-})
 
-// server.register(require('./static'));
 server.register(require('./annotateImage'));
 
 const start = async () => {
