@@ -18,8 +18,7 @@ server.register(helmet);
 server.register(compress);
 
 server.register(require('fastify-static'), {
-  root: path.join(__dirname, "..", "..", './public'),
-  prefix: '/public/'
+  root: path.join(__dirname, "..", "..", './public')
 })
 server.setNotFoundHandler((req, res) => {
   res.sendFile('index.html')
@@ -30,7 +29,7 @@ server.register(require('./annotateImage'));
 
 const start = async () => {
   try {
-    await server.listen(3000)
+    await server.listen(1235)
   }
   catch (err) {
     server.log.error(err)
