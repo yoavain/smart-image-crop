@@ -6,6 +6,6 @@
         "smart-image-crop-node",
         "smart-image-crop-node-gpu",
         "smart-image-crop-browser",
-        "demo/smart-image-crop-browser"
+        "demo/smart-image-crop-browser-demo"
     ]
 }
