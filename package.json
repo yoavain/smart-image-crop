@@ -4,7 +4,8 @@
   "description": "Lerna root monorepo for @yoavain/smart-image-crop",
   "scripts": {
     "install": "lerna bootstrap --force-local",
-    "build": "lerna run build"
+    "build": "lerna run build",
+	"start": "npm run --prefix smart-image-crop-tester start"
   },
   "keywords": [],
   "author": "",
