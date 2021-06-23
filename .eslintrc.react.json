@@ -1,0 +1,15 @@
+{
+    "overrides": [
+        {
+            "files": "*.js,*.ts,*.jsx,*.tsx"
+        }
+    ],
+    "plugins": ["react"],
+    "extends": [
+        "./.eslintrc.json",
+        "plugin:react/recommended"
+    ],
+    "rules": {
+        "react/display-name": 0
+    }
+}

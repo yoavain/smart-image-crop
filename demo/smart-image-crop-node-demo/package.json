@@ -8,19 +8,21 @@
         "start:server": "nodemon",
         "start:server:debug": "cross-env TS_NODE_TRANSPILE_ONLY=true node --inspect-brk --require ts-node/register src/server/server.ts",
         "start:client": "parcel watch src/client/index.html --out-dir=public",
-        "type-check": "tsc --build tsconfig.json"
+        "type-check": "tsc --build tsconfig.json",
+        "eslint": "eslint src/",
+        "eslint:fix": "npm run eslint -- --fix"
     },
     "keywords": [],
     "author": "",
     "license": "ISC",
     "dependencies": {
+        "@codait/max-vis": "0.3.0",
+        "@yoavain/smart-image-crop-node": "1.0.0",
         "fastify": "3.18.0",
         "fastify-compress": "3.6.0",
         "fastify-helmet": "5.3.1",
         "fastify-static": "4.2.2",
         "make-promises-safe": "5.1.0",
-        "@codait/max-vis": "0.3.0",
-        "@yoavain/smart-image-crop-node": "1.0.0",
         "react": "17.0.2",
         "react-dom": "17.0.2",
         "rimraf": "3.0.2"
@@ -29,6 +31,7 @@
         "@types/node": "15.12.4",
         "concurrently": "6.2.0",
         "cross-env": "7.0.3",
+        "eslint": "7.29.0",
         "nodemon": "2.0.7",
         "parcel-bundler": "1.12.5",
         "rimraf": "3.0.2",

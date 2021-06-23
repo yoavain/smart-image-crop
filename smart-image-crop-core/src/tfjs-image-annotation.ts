@@ -7,28 +7,28 @@ const maxNumBoxes = 8;
 
 // load COCO-SSD graph model
 const loadModel = async (): Promise<GraphModel> => {
-    return await tf.loadGraphModel(modelUrl, {fromTFHub: true});
-}
+    return await tf.loadGraphModel(modelUrl, { fromTFHub: true });
+};
 
 // run prediction with the provided input Tensor
 const runModel = (model: GraphModel, inputTensor: Tensor<Rank>): Promise<Tensor | Tensor[]> => {
-    console.log('running model');
+    console.log("running model");
     return model.executeAsync(inputTensor);
-}
+};
 
 // process the model output into a friendly JSON format
 const processOutput = (prediction, width, height) => {
-    console.log('processOutput');
+    console.log("processOutput");
 
     const [maxScores, classes] = extractClassesAndMaxScores(prediction[0]);
     const indexes = calculateNMS(prediction[1], maxScores);
 
     return createJSONresponse(prediction[1].dataSync(), maxScores, indexes, classes, width, height);
-}
+};
 
 // determine the classes and max scores from the prediction
-const extractClassesAndMaxScores = predictionScores => {
-    console.log('calculating classes & max scores');
+const extractClassesAndMaxScores = (predictionScores) => {
+    console.log("calculating classes & max scores");
 
     const scores = predictionScores.dataSync();
     const numBoxesFound = predictionScores.shape[1];
@@ -55,21 +55,21 @@ const extractClassesAndMaxScores = predictionScores => {
     }
 
     return [maxScores, classes];
-}
+};
 
 // perform non maximum suppression of bounding boxes
 const calculateNMS = (outputBoxes, maxScores) => {
-    console.log('calculating box indexes');
+    console.log("calculating box indexes");
 
     const boxes = tf.tensor2d(outputBoxes.dataSync(), [outputBoxes.shape[1], outputBoxes.shape[3]]);
     const indexTensor = tf.image.nonMaxSuppression(boxes, maxScores, maxNumBoxes, 0.5, 0.5);
 
     return indexTensor.dataSync();
-}
+};
 
 // create JSON object with bounding boxes and label
 const createJSONresponse = (boxes, scores, indexes, classes, width: number, height: number) => {
-    console.log('create JSON output');
+    console.log("create JSON output");
 
     const count = indexes.length;
     const objects = [];
@@ -94,7 +94,7 @@ const createJSONresponse = (boxes, scores, indexes, classes, width: number, heig
     }
 
     return objects;
-}
+};
 
 export const annotateImage = async (inputTensor: Tensor<Rank>): Promise<any> => {
     try {
@@ -108,4 +108,4 @@ export const annotateImage = async (inputTensor: Tensor<Rank>): Promise<any> => 
     catch (err) {
         console.error(err);
     }
-}
+};
