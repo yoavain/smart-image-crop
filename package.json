@@ -5,7 +5,8 @@
   "scripts": {
     "install": "lerna bootstrap --force-local",
     "build": "lerna run build",
-	"start": "npm run --prefix demo/smart-image-crop-browser-demo start"
+    "start-demo-browser": "npm run --prefix demo/smart-image-crop-browser-demo start",
+    "start-demo-node": "npm run --prefix demo/smart-image-crop-node-demo start"
   },
   "keywords": [],
   "author": "",

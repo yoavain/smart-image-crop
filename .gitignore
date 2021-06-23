@@ -2,3 +2,4 @@
 /.idea/
 **/dist/
 **/.cache/
+/demo/smart-image-crop-node-demo/public/

@@ -1,0 +1,5 @@
+{
+    "watch": ["src/server/**/*.*"],
+    "ignore": [],
+    "exec": "cross-env TS_NODE_TRANSPILE_ONLY=true node --require ts-node/register src/server/server.ts"
+}
