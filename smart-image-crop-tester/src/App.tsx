@@ -5,12 +5,20 @@ import { processInput } from "@yoavain/smart-image-crop-browser";
 import * as maxvis from "@codait/max-vis";
 import type { Rank, Tensor } from "@tensorflow/tfjs";
 
+const originalImageDisplay = { width: "640px" };
+const landscape = { width: "320px", height: "240px"};
+const portrait = { width: "240px", height: "320px" };
+const square = { width: "240px", height: "240px" };
+
+
 export const App: FC<{}> = () => {
     const [selectedFile, setSelectedFile] = useState();
     const [image, setImage] = useState();
     const [annotatedImage, setAnnotatedImage] = useState();
 
+
     const imageRef = React.createRef();
+
     useEffect(() => {
         if (selectedFile) {
             const reader = new FileReader();
@@ -44,25 +52,26 @@ export const App: FC<{}> = () => {
 
     return <React.Fragment>
         <input type="file" onChange={onFileChange} />
-        {image ?
+        {!annotatedImage && image ?
             <div className="img-hover-zoom">
-                <img ref={imageRef} src={image ?? ""} alt="Load image" />
+                <img ref={imageRef} src={image ?? ""} alt="Load image" style={{ display: "none" }}/>
+                <img src={image ?? ""} alt="Load image" style={{ ...originalImageDisplay, margin: "20px" }}/>
             </div>
             :
             <div/>
         }
         {annotatedImage ?
             <div className="img-hover-zoom">
-                <img src={annotatedImage ?? ""} alt="Annotated image" style={{ width: "640px", margin: "20px" }}/>
+                <img src={annotatedImage ?? ""} alt="Annotated image" style={{ ...originalImageDisplay, margin: "20px" }}/>
             </div>
             :
             <div/>
         }
         {image ?
             <div>
-                <img src={image} alt="Load image" style={{ width: "320px", height: "240px", margin: "20px" }}/>
-                <img src={image} alt="Load image" style={{ width: "240px", height: "240px", margin: "20px" }}/>
-                <img src={image} alt="Load image" style={{ width: "240px", height: "320px", margin: "20px" }}/>
+                <img src={image} alt="Landscape" style={{ ...landscape, margin: "20px" }}/>
+                <img src={image} alt="Square" style={{ ...square, margin: "20px" }}/>
+                <img src={image} alt="Portrait" style={{ ...portrait, margin: "20px" }}/>
             </div>
             :
             <div/>
