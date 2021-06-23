@@ -1,0 +1,10 @@
+{
+    "version": "1.0.0",
+    "npmClient": "npm",
+    "packages": [
+        "smart-image-crop-core",
+        "smart-image-crop-node",
+        "smart-image-crop-browser",
+        "smart-image-crop-tester"
+    ]
+}
