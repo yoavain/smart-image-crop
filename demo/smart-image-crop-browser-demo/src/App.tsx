@@ -13,6 +13,15 @@ export const App: FC<{}> = () => {
     const [image, setImage] = useState();
     const [prediction, setPrediction] = useState();
     const [annotatedImage, setAnnotatedImage] = useState();
+    const [detectionTime, setDetectionTime] = useState();
+
+    const resetState = () => {
+        setSelectedFile();
+        setImage();
+        setPrediction();
+        setAnnotatedImage();
+        setDetectionTime();
+    }
 
     const imageRef = React.createRef();
 
@@ -30,13 +39,16 @@ export const App: FC<{}> = () => {
 
     useEffect(() => {
         if (image) {
+            const startDate = new Date().valueOf();
             annotateImage(imageRef.current)
                 .then(predictionJson => {
+                    console.log(`Prediction: ${JSON.stringify(predictionJson, null, "\t")}`);
                     setPrediction(predictionJson);
                     return maxvis.annotate(predictionJson, image);
                 })
                 .then((annotatedImageBlob: Buffer) => {
                     setAnnotatedImage(URL.createObjectURL(annotatedImageBlob));
+                    setDetectionTime(new Date().valueOf() - startDate);
                 })
         }
     }, [image])
@@ -46,6 +58,7 @@ export const App: FC<{}> = () => {
     }, prediction)
 
     const onFileChange = (event) => {
+        resetState();
         setSelectedFile(event.target.files[0])
     };
 
@@ -62,6 +75,7 @@ export const App: FC<{}> = () => {
         {annotatedImage ?
             <div className="img-hover-zoom">
                 <img src={annotatedImage ?? ""} alt="Annotated image" style={{ ...originalImageDisplay, margin: "20px" }}/>
+                <div>Detection time: {detectionTime}ms</div>
             </div>
             :
             <div/>

@@ -1,5 +1,5 @@
 {
-    "name": "smart-image-crop-tester",
+    "name": "smart-image-crop-browser-demo",
     "version": "1.0.0",
     "description": "Test page for @yoavain/smart-image-crop",
     "private": true,

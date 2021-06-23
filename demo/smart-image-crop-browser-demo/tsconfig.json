@@ -12,6 +12,7 @@
     "noEmit": true,
     "importsNotUsedAsValues": "error"
   },
-  "include": ["src/**/*", "test/**/*"],
+  "include": [
+      "../demo/smart-image-crop-browser-demo/src/**/*", "test/**/*"],
   "exclude": ["node_modules"]
 }

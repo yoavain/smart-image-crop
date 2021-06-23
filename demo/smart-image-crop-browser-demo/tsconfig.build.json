@@ -12,6 +12,8 @@
     "outDir": "dist",
     "importsNotUsedAsValues": "error"
   },
-  "include": ["src/**/*"],
+  "include": [
+      "../demo/smart-image-crop-browser-demo/src/**/*"
+  ],
   "exclude": ["node_modules"]
 }
