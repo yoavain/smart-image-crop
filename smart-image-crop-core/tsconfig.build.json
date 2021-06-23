@@ -1,17 +1,8 @@
 {
+  "extends": "../tsconfig.build.json",
   "compilerOptions": {
-    "module": "commonjs",
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "allowJs": true,
-    "moduleResolution": "node",
-    "target": "es6",
-    "lib": ["dom", "es6", "es2017", "es2017.object", "esnext.asynciterable"],
     "rootDir": "src",
     "outDir": "dist",
-    "declaration": true,
-    "sourceMap": true,
-    "importsNotUsedAsValues": "error"
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules"]

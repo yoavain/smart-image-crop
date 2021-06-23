@@ -1,4 +1,4 @@
-import fastify, { FastifyInstance, FastifyLoggerInstance, RawReplyDefaultExpression, RawRequestDefaultExpression } from 'fastify';
+import fastify from 'fastify';
 import type { FastifyInstance, FastifyLoggerInstance, RawReplyDefaultExpression, RawRequestDefaultExpression } from 'fastify';
 import type { Server } from 'http';
 import * as path from "path";

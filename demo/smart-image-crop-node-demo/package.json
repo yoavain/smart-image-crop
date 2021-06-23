@@ -7,7 +7,8 @@
         "start": "concurrently \"npm run start:server\" \"npm run start:client\"",
         "start:server": "nodemon",
         "start:server:debug": "cross-env TS_NODE_TRANSPILE_ONLY=true node --inspect-brk --require ts-node/register src/server/server.ts",
-        "start:client": "parcel watch src/client/index.html --out-dir=public"
+        "start:client": "parcel watch src/client/index.html --out-dir=public",
+        "type-check": "tsc --build tsconfig.json"
     },
     "keywords": [],
     "author": "",

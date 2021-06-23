@@ -4,7 +4,8 @@
     "description": "Test page for @yoavain/smart-image-crop",
     "private": true,
     "scripts": {
-        "start": "parcel src/index.html"
+        "start": "parcel src/index.html",
+        "type-check": "tsc --build tsconfig.json"
     },
     "keywords": [],
     "author": "",
