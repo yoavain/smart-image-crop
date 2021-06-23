@@ -1,0 +1,25 @@
+{
+    "name": "smart-image-crop-node-demo",
+    "version": "1.0.0",
+    "description": "Test page for @yoavain/smart-image-crop",
+    "private": true,
+    "scripts": {
+        "start": "parcel src/index.html"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "@codait/max-vis": "0.3.0",
+        "@yoavain/smart-image-crop-node": "1.0.0",
+        "react": "17.0.2",
+        "react-dom": "17.0.2",
+        "rimraf": "^3.0.2"
+    },
+    "devDependencies": {
+        "@types/node": "15.12.4",
+        "rimraf": "3.0.2",
+        "ts-node": "10.0.0",
+        "typescript": "4.3.4"
+    }
+}

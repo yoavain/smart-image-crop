@@ -9,6 +9,8 @@
     "lib": ["dom", "es6", "es2017", "es2017.object", "esnext.asynciterable"],
     "rootDir": "src",
     "outDir": "dist",
+    "declaration": true,
+    "sourceMap": true,
     "importsNotUsedAsValues": "error"
   },
   "include": ["src/**/*"],
