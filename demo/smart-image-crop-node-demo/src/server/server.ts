@@ -7,6 +7,7 @@ require("make-promises-safe"); // installs an 'unhandledRejection' handler
 
 const compress = require("fastify-compress");
 const helmet = require("fastify-helmet");
+const multipart = require("fastify-multipart");
 
 export type FastifyServer = FastifyInstance<Server, RawRequestDefaultExpression<Server>, RawReplyDefaultExpression<Server>, FastifyLoggerInstance> & PromiseLike<FastifyInstance<Server, RawRequestDefaultExpression<Server>, RawReplyDefaultExpression<Server>, FastifyLoggerInstance>>
 
@@ -16,6 +17,7 @@ const server: FastifyServer = fastify({
 
 server.register(helmet);
 server.register(compress);
+server.register(multipart);
 
 server.register(require("fastify-static"), {
     root: path.join(__dirname, "..", "..", "./public")

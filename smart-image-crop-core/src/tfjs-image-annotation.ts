@@ -1,7 +1,9 @@
 import type { GraphModel, Rank, Tensor } from "@tensorflow/tfjs";
 import * as tf from "@tensorflow/tfjs";
 import { labels } from "./labels";
+import type { Prediction } from "./types";
 
+// todo - https://www.tensorflow.org/js/guide/save_load
 const modelUrl = "https://tfhub.dev/tensorflow/tfjs-model/ssdlite_mobilenet_v2/1/default/1";
 const maxNumBoxes = 8;
 
@@ -21,13 +23,12 @@ const runModel = (model: GraphModel, inputTensor: Tensor<Rank>): Promise<Tensor 
 };
 
 // process the model output into a friendly JSON format
-const processOutput = (prediction, width, height) => {
+const processOutput = (prediction: Tensor<Rank> | Tensor[], width: number, height: number): Prediction => {
     console.log("processOutput");
-
     const [maxScores, classes] = extractClassesAndMaxScores(prediction[0]);
     const indexes = calculateNMS(prediction[1], maxScores);
 
-    return createJSONresponse(prediction[1].dataSync(), maxScores, indexes, classes, width, height);
+    return createJsonResponse(prediction[1].dataSync(), maxScores, indexes, classes, width, height);
 };
 
 // determine the classes and max scores from the prediction
@@ -72,7 +73,7 @@ const calculateNMS = (outputBoxes, maxScores) => {
 };
 
 // create JSON object with bounding boxes and label
-const createJSONresponse = (boxes, scores, indexes, classes, width: number, height: number) => {
+const createJsonResponse = (boxes, scores, indexes, classes, width: number, height: number): Prediction => {
     console.log("create JSON output");
 
     const count = indexes.length;
@@ -85,10 +86,10 @@ const createJSONresponse = (boxes, scores, indexes, classes, width: number, heig
             bbox[j] = boxes[indexes[i] * 4 + j];
         }
 
-        const minY = bbox[0] * height;
-        const minX = bbox[1] * width;
-        const maxY = bbox[2] * height;
-        const maxX = bbox[3] * width;
+        const minY = Math.max(0, bbox[0] * height);
+        const minX = Math.max(0, bbox[1] * width);
+        const maxY = Math.min(height, bbox[2] * height);
+        const maxX = Math.min(width, bbox[3] * width);
 
         objects.push({
             bbox: [minX, minY, maxX, maxY],
@@ -100,7 +101,7 @@ const createJSONresponse = (boxes, scores, indexes, classes, width: number, heig
     return objects;
 };
 
-export const annotateImage = async (inputTensor: Tensor<Rank>): Promise<any> => {
+export const annotateImage = async (inputTensor: Tensor<Rank>): Promise<Prediction> => {
     try {
         const model: GraphModel = await loadModel();
         const height = inputTensor.shape[1];

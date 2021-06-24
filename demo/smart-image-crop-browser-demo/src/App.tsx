@@ -1,10 +1,12 @@
+import type { FC } from "react";
 import * as React from "react";
-import { FC, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import type { Prediction } from "@yoavain/smart-image-crop-browser";
 import { annotateImage } from "@yoavain/smart-image-crop-browser";
 import * as maxvis from "@codait/max-vis";
 
 const originalImageDisplay = { width: "640px" };
-const landscape = { width: "320px", height: "240px"};
+const landscape = { width: "320px", height: "240px" };
 const portrait = { width: "240px", height: "320px" };
 const square = { width: "240px", height: "240px" };
 
@@ -21,7 +23,7 @@ export const App: FC<{}> = () => {
         setPrediction();
         setAnnotatedImage();
         setDetectionTime();
-    }
+    };
 
     const imageRef = React.createRef();
 
@@ -41,7 +43,7 @@ export const App: FC<{}> = () => {
         if (image) {
             const startDate = new Date().valueOf();
             annotateImage(imageRef.current)
-                .then(predictionJson => {
+                .then((predictionJson: Prediction) => {
                     console.log(`Prediction: ${JSON.stringify(predictionJson, null, "\t")}`);
                     setPrediction(predictionJson);
                     return maxvis.annotate(predictionJson, image);
@@ -49,17 +51,17 @@ export const App: FC<{}> = () => {
                 .then((annotatedImageBlob: Buffer) => {
                     setAnnotatedImage(URL.createObjectURL(annotatedImageBlob));
                     setDetectionTime(new Date().valueOf() - startDate);
-                })
+                });
         }
-    }, [image])
+    }, [image]);
 
     useEffect(() => {
 
-    }, prediction)
+    }, prediction);
 
     const onFileChange = (event) => {
         resetState();
-        setSelectedFile(event.target.files[0])
+        setSelectedFile(event.target.files[0]);
     };
 
     return <React.Fragment>
@@ -89,5 +91,5 @@ export const App: FC<{}> = () => {
             :
             <div/>
         }
-    </React.Fragment>
-}
+    </React.Fragment>;
+};

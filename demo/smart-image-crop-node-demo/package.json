@@ -22,6 +22,7 @@
         "fastify": "3.18.0",
         "fastify-compress": "3.6.0",
         "fastify-helmet": "5.3.1",
+        "fastify-multipart": "4.0.6",
         "fastify-static": "4.2.2",
         "make-promises-safe": "5.1.0",
         "react": "17.0.2",
@@ -29,6 +30,7 @@
         "rimraf": "3.0.2"
     },
     "devDependencies": {
+        "@types/busboy": "0.2.3",
         "@types/node": "15.12.4",
         "concurrently": "6.2.0",
         "cross-env": "7.0.3",

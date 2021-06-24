@@ -42,9 +42,12 @@ export const App: FC<{}> = () => {
         if (image) {
             const startDate = new Date().valueOf();
 
-            axios.post("/api/annotate-image", { image })
-                .then(() => {
+            const formData = new FormData();
+            formData.append("image", selectedFile);
+            axios.post("/api/annotate-image", formData, { headers: { "Content-Type": "multipart/form-data" } })
+                .then((prediction) => {
                     // todo
+                    console.log(prediction);
                 });
             /*
             annotateImage(imageRef.current)
