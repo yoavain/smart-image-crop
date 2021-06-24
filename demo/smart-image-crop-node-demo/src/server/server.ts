@@ -15,7 +15,7 @@ const server: FastifyServer = fastify({
     logger: true
 });
 
-server.register(helmet);
+server.register(helmet,  { contentSecurityPolicy: false });
 server.register(compress);
 server.register(multipart);
 

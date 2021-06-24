@@ -2,7 +2,10 @@ import * as React from "react";
 import type { FC } from "react";
 import { useEffect, useState } from "react";
 import * as maxvis from "@codait/max-vis";
+import type { AxiosResponse } from "axios";
 import axios from "axios";
+import type { Prediction } from "@yoavain/smart-image-crop-node";
+import type { AnnotateImageResponse } from "../common/types";
 
 const originalImageDisplay = { width: "640px" };
 const landscape = { width: "320px", height: "240px" };
@@ -45,13 +48,8 @@ export const App: FC<{}> = () => {
             const formData = new FormData();
             formData.append("image", selectedFile);
             axios.post("/api/annotate-image", formData, { headers: { "Content-Type": "multipart/form-data" } })
-                .then((prediction) => {
-                    // todo
-                    console.log(prediction);
-                });
-            /*
-            annotateImage(imageRef.current)
-                .then(predictionJson => {
+                .then((response: AxiosResponse<AnnotateImageResponse>) => {
+                    const predictionJson: Prediction = response.data.prediction;
                     console.log(`Prediction: ${JSON.stringify(predictionJson, null, "\t")}`);
                     setPrediction(predictionJson);
                     return maxvis.annotate(predictionJson, image);
@@ -59,8 +57,7 @@ export const App: FC<{}> = () => {
                 .then((annotatedImageBlob: Buffer) => {
                     setAnnotatedImage(URL.createObjectURL(annotatedImageBlob));
                     setDetectionTime(new Date().valueOf() - startDate);
-                })
-             */
+                });
         }
     }, [image]);
 

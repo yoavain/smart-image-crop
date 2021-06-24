@@ -12,6 +12,10 @@
     "keywords": [],
     "author": "",
     "license": "ISC",
+    "engines": {
+        "node": ">=12 <15",
+        "npm": "<7"
+    },
     "dependencies": {
         "@codait/max-vis": "0.3.0",
         "@yoavain/smart-image-crop-browser": "1.0.0",
