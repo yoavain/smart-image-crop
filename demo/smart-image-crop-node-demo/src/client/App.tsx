@@ -1,9 +1,11 @@
 import * as React from "react";
-import { FC, useEffect, useState } from "react";
+import type { FC } from "react";
+import { useEffect, useState } from "react";
 import * as maxvis from "@codait/max-vis";
+import axios from "axios";
 
 const originalImageDisplay = { width: "640px" };
-const landscape = { width: "320px", height: "240px"};
+const landscape = { width: "320px", height: "240px" };
 const portrait = { width: "240px", height: "320px" };
 const square = { width: "240px", height: "240px" };
 
@@ -20,7 +22,7 @@ export const App: FC<{}> = () => {
         setPrediction();
         setAnnotatedImage();
         setDetectionTime();
-    }
+    };
 
     const imageRef = React.createRef();
 
@@ -39,6 +41,11 @@ export const App: FC<{}> = () => {
     useEffect(() => {
         if (image) {
             const startDate = new Date().valueOf();
+
+            axios.post("/api/annotate-image", { image })
+                .then(() => {
+                    // todo
+                });
             /*
             annotateImage(imageRef.current)
                 .then(predictionJson => {
@@ -52,15 +59,15 @@ export const App: FC<{}> = () => {
                 })
              */
         }
-    }, [image])
+    }, [image]);
 
     useEffect(() => {
 
-    }, prediction)
+    }, prediction);
 
     const onFileChange = (event) => {
         resetState();
-        setSelectedFile(event.target.files[0])
+        setSelectedFile(event.target.files[0]);
     };
 
     return <React.Fragment>
@@ -90,5 +97,5 @@ export const App: FC<{}> = () => {
             :
             <div/>
         }
-    </React.Fragment>
-}
+    </React.Fragment>;
+};

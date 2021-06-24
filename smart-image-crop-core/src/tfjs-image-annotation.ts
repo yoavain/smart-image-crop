@@ -1,13 +1,17 @@
 import type { GraphModel, Rank, Tensor } from "@tensorflow/tfjs";
 import * as tf from "@tensorflow/tfjs";
-import { labels } from "./tfjs-image-annotation-labels";
+import { labels } from "./labels";
 
 const modelUrl = "https://tfhub.dev/tensorflow/tfjs-model/ssdlite_mobilenet_v2/1/default/1";
 const maxNumBoxes = 8;
 
 // load COCO-SSD graph model
+let model: GraphModel;
 const loadModel = async (): Promise<GraphModel> => {
-    return await tf.loadGraphModel(modelUrl, { fromTFHub: true });
+    if (!model) {
+        model = await tf.loadGraphModel(modelUrl, { fromTFHub: true });
+    }
+    return model;
 };
 
 // run prediction with the provided input Tensor

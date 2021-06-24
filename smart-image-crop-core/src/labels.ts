@@ -1,4 +1,4 @@
-export const labels: string[] = [
+export const labels = [
     "person",
     "bicycle",
     "car",
@@ -79,4 +79,4 @@ export const labels: string[] = [
     "teddy bear",
     "hair drier",
     "toothbrush"
-];
+] as const;
