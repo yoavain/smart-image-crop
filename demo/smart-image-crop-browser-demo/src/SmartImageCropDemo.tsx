@@ -1,21 +1,25 @@
 import type { FC } from "react";
 import * as React from "react";
 import { useEffect, useState } from "react";
-import type { Prediction } from "@yoavain/smart-image-crop-browser";
-import { annotateImage } from "@yoavain/smart-image-crop-browser";
 import * as maxvis from "@codait/max-vis";
+import type { Prediction } from "@yoavain/smart-image-crop-browser";
+import type { AnnotateImageService } from "./image-utils";
 
 const originalImageDisplay = { width: "640px" };
 const landscape = { width: "320px", height: "240px" };
 const portrait = { width: "240px", height: "320px" };
 const square = { width: "240px", height: "240px" };
 
-export const App: FC<{}> = () => {
-    const [selectedFile, setSelectedFile] = useState();
-    const [image, setImage] = useState();
-    const [prediction, setPrediction] = useState();
-    const [annotatedImage, setAnnotatedImage] = useState();
-    const [detectionTime, setDetectionTime] = useState();
+export type SmartImageCropDemoProps = {
+    annotateImageService: AnnotateImageService;
+}
+
+export const SmartImageCropDemo: FC<SmartImageCropDemoProps> = (props: SmartImageCropDemoProps) => {
+    const [selectedFile, setSelectedFile] = useState<File>();
+    const [image, setImage] = useState<string | ArrayBuffer>();
+    const [prediction, setPrediction] = useState<Prediction>();
+    const [annotatedImage, setAnnotatedImage] = useState<string>();
+    const [detectionTime, setDetectionTime] = useState<number>();
 
     const resetState = () => {
         setSelectedFile();
@@ -42,7 +46,8 @@ export const App: FC<{}> = () => {
     useEffect(() => {
         if (image) {
             const startDate = new Date().valueOf();
-            annotateImage(imageRef.current)
+
+            props.annotateImageService(imageRef.current)
                 .then((predictionJson: Prediction) => {
                     console.log(`Prediction: ${JSON.stringify(predictionJson, null, "\t")}`);
                     setPrediction(predictionJson);

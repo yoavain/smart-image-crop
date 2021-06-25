@@ -1,10 +1,11 @@
 // index.tsx
-import React from 'react'
-import ReactDOM from 'react-dom'
-import { App } from './App'
-import "regenerator-runtime/runtime"
+import React from "react";
+import ReactDOM from "react-dom";
+import { SmartImageCropDemo } from "./SmartImageCropDemo";
+import "regenerator-runtime/runtime";
+import { annotateImageService } from "./image-utils";
 
 ReactDOM.render(
-  <App/>,
-  document.getElementById('root'),
-)
+    <SmartImageCropDemo annotateImageService={annotateImageService}/>,
+    document.getElementById("root")
+);
