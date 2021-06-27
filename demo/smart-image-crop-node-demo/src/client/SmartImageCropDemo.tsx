@@ -2,6 +2,8 @@ import type { FC } from "react";
 import * as React from "react";
 import { useEffect, useState } from "react";
 import * as maxvis from "@codait/max-vis";
+import Cropper from "react-cropper";
+import "cropperjs/dist/cropper.css";
 import type { Prediction } from "@yoavain/smart-image-crop-node";
 import type { AnnotateImageService } from "./image-utils";
 
@@ -20,6 +22,9 @@ export const SmartImageCropDemo: FC<SmartImageCropDemoProps> = (props: SmartImag
     const [prediction, setPrediction] = useState<Prediction>();
     const [annotatedImage, setAnnotatedImage] = useState<string>();
     const [detectionTime, setDetectionTime] = useState<number>();
+
+    const [cropper, setCropper] = useState<any>();
+    const [cropData, setCropData] = useState("#");
 
     const resetState = () => {
         setSelectedFile();
@@ -75,6 +80,25 @@ export const SmartImageCropDemo: FC<SmartImageCropDemoProps> = (props: SmartImag
             <div className="img-hover-zoom">
                 <img ref={imageRef} src={image ?? ""} alt="Load image" style={{ display: "none" }}/>
                 <img src={image ?? ""} alt="Load image" style={{ ...originalImageDisplay, margin: "20px" }}/>
+
+                <Cropper
+                    style={{ height: 400, width: "100%" }}
+                    zoomTo={1}
+                    initialAspectRatio={1}
+                    preview=".img-preview"
+                    src={image}
+                    viewMode={1}
+                    guides={false}
+                    minCropBoxHeight={10}
+                    minCropBoxWidth={10}
+                    background={false}
+                    responsive={false}
+                    autoCropArea={0}
+                    checkOrientation={false} // https://github.com/fengyuanchen/cropperjs/issues/671
+                    onInitialized={(instance) => {
+                        setCropper(instance);
+                    }}
+                />
             </div>
             :
             <div/>
@@ -92,6 +116,13 @@ export const SmartImageCropDemo: FC<SmartImageCropDemoProps> = (props: SmartImag
                 <img src={image} alt="Landscape" style={{ ...landscape, margin: "20px" }}/>
                 <img src={image} alt="Square" style={{ ...square, margin: "20px" }}/>
                 <img src={image} alt="Portrait" style={{ ...portrait, margin: "20px" }}/>
+
+                <div
+                    className="img-preview"
+                    style={{ width: "100%", float: "left", height: "300px" }}
+                />
+
+                <img style={{ width: "100%" }} src={cropData} alt="cropped" />
             </div>
             :
             <div/>
