@@ -21,7 +21,6 @@
     },
     "dependencies": {
         "@codait/max-vis": "0.3.0",
-        "@yoavain/smart-image-crop-node": "1.0.0",
         "axios": "0.26.1",
         "fastify": "3.27.4",
         "fastify-compress": "4.0.1",
