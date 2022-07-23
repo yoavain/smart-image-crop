@@ -9,7 +9,13 @@ const compress = require("fastify-compress");
 const helmet = require("fastify-helmet");
 const multipart = require("fastify-multipart");
 
-export type FastifyServer = FastifyInstance<Server, RawRequestDefaultExpression<Server>, RawReplyDefaultExpression<Server>, FastifyLoggerInstance> & PromiseLike<FastifyInstance<Server, RawRequestDefaultExpression<Server>, RawReplyDefaultExpression<Server>, FastifyLoggerInstance>>
+export type FastifyServer = FastifyInstance<
+    Server,
+    RawRequestDefaultExpression<Server>,
+    RawReplyDefaultExpression<Server>,
+    FastifyLoggerInstance> & PromiseLike<FastifyInstance<Server,
+    RawRequestDefaultExpression<Server>, RawReplyDefaultExpression<Server>, FastifyLoggerInstance>
+>
 
 const server: FastifyServer = fastify({
     logger: true
