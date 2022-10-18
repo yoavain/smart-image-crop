@@ -23,7 +23,7 @@
     "@yoavain/smart-image-crop-core": "1.0.0"
   },
   "devDependencies": {
-    "@types/node": "18.8.4",
+    "@types/node": "18.11.0",
     "eslint": "8.25.0",
     "rimraf": "3.0.2",
     "ts-node": "10.9.1",

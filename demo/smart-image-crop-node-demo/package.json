@@ -22,7 +22,7 @@
     "dependencies": {
         "@codait/max-vis": "0.3.0",
         "axios": "0.27.2",
-        "fastify": "4.8.1",
+        "fastify": "4.9.2",
         "fastify-compress": "4.1.0",
         "fastify-helmet": "7.1.0",
         "fastify-multipart": "5.4.0",
@@ -34,7 +34,7 @@
     },
     "devDependencies": {
         "@types/busboy": "1.5.0",
-        "@types/node": "18.8.4",
+        "@types/node": "18.11.0",
         "concurrently": "7.4.0",
         "cross-env": "7.0.3",
         "eslint": "8.25.0",
