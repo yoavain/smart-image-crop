@@ -22,7 +22,7 @@
     "dependencies": {
         "@codait/max-vis": "0.3.0",
         "axios": "0.27.2",
-        "fastify": "4.9.2",
+        "fastify": "4.10.2",
         "fastify-compress": "4.1.0",
         "fastify-helmet": "7.1.0",
         "fastify-multipart": "5.4.0",
