@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "@tensorflow/tfjs": "3.20.0",
-    "@tensorflow/tfjs-node-gpu": "3.20.0",
+    "@tensorflow/tfjs-node-gpu": "4.20.0",
     "@yoavain/smart-image-crop-core": "1.0.0",
     "rimraf": "3.0.2"
   },
